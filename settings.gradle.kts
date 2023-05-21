@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "TestAppOgnam"
-include ':app'
+include (":app")
