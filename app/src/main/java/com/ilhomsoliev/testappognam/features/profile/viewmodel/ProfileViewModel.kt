@@ -31,15 +31,25 @@ class ProfileViewModel(
     private val _isOnline = MutableStateFlow(false)
     val isOnline = _isOnline.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
+
     private val _city = MutableStateFlow("")
     val city = _city.asStateFlow()
 
     private val _birthday = MutableStateFlow("")
     val birthday = _birthday.asStateFlow()
 
+
+
     init {
         viewModelScope.launch {
-            repository.getProfile()?.profile_data?.let { profile ->
+            _isLoading.emit(true)
+            val res = repository.getProfile()?.profile_data
+            if(res == null)
+                _isLoading.emit(false)
+            res?.let { profile ->
+                _isLoading.emit(false)
                 _phone.emit(profile.phone)
                 _name.emit(profile.name)
                 _username.emit(profile.username)
@@ -49,10 +59,15 @@ class ProfileViewModel(
                 _city.emit(profile.city ?: "")
                 _birthday.emit(profile.birthday ?: "")
             }
+
         }
     }
 
     suspend fun logout() {
         repository.logout()
+    }
+
+    suspend fun saveData(){
+
     }
 }

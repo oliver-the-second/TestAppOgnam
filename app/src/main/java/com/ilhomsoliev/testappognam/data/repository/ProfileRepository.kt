@@ -13,6 +13,7 @@ class ProfileRepository(
     private val dataStoreManager: DataStoreManager,
 ) {
     suspend fun getProfile() = withContext(IO) {
+        refreshToken()
         val token = dataStoreManager.getToken()
         Log.d("Hello", "Token: $token")
         if (token.isEmpty()) return@withContext null
@@ -36,11 +37,12 @@ class ProfileRepository(
         username: String,
         vk: String
     ) = withContext(IO) {
+        refreshToken()
         val token = dataStoreManager.getToken()
         if (token.isEmpty())return@withContext null
         try {
             api.updateProfile(
-                token, UpdateProfileRequest(
+                "Bearer $token", UpdateProfileRequest(
                     avatar = avatar,
                     birthday = birthday,
                     city = city,

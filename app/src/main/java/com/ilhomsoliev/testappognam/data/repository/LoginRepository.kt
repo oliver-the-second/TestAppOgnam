@@ -34,7 +34,7 @@ class LoginRepository(
             response.is_user_exists
         } catch (e: Exception) {
             Log.d("Login Exception", "${e.message}")
-            false
+            null
         }
     }
 

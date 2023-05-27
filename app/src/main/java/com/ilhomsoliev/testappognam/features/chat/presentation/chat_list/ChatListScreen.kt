@@ -19,5 +19,9 @@ fun ChatListScreen(
             navController.navigate(Screens.Profile)
         }
 
+        override fun openChat() {
+            navController.navigate(Screens.Chat)
+        }
+
     })
 }

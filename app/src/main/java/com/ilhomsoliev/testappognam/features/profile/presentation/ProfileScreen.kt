@@ -24,6 +24,8 @@ fun ProfileScreen(
     val last by vm.last.collectAsState()
     val vk by vm.vk.collectAsState()
     val isOnline by vm.isOnline.collectAsState()
+    val isLoading by vm.isLoading.collectAsState()
+
 
     ProfileContent(state = ProfileState(
         name = name,
@@ -35,6 +37,7 @@ fun ProfileScreen(
         isOnline = isOnline,
         city = city,
         birthday = birthday,
+        isLoading = isLoading
     ), callback = object : ProfileCallback {
         override fun onLogout() {
             scope.launch {
@@ -45,6 +48,10 @@ fun ProfileScreen(
                     }
                 }
             }
+        }
+
+        override fun onBack() {
+            navController.popBackStack()
         }
     })
 
