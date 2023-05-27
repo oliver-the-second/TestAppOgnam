@@ -3,14 +3,15 @@ package com.ilhomsoliev.testappognam.features.profile.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ilhomsoliev.testappognam.data.repository.ProfileRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProfileViewModel(
     private val repository: ProfileRepository,
 ) : ViewModel() {
-
     private val _phone = MutableStateFlow("")
     val phone = _phone.asStateFlow()
 
@@ -40,34 +41,31 @@ class ProfileViewModel(
     private val _birthday = MutableStateFlow("")
     val birthday = _birthday.asStateFlow()
 
+    private val _status = MutableStateFlow("")
+    val status = _status.asStateFlow()
 
 
-    init {
-        viewModelScope.launch {
-            _isLoading.emit(true)
-            val res = repository.getProfile()?.profile_data
-            if(res == null)
-                _isLoading.emit(false)
-            res?.let { profile ->
-                _isLoading.emit(false)
-                _phone.emit(profile.phone)
-                _name.emit(profile.name)
-                _username.emit(profile.username)
-                _last.emit(profile.last ?: "")
-                _instagram.emit(profile.instagram ?: "")
-                _vk.emit(profile.vk ?: "")
-                _city.emit(profile.city ?: "")
-                _birthday.emit(profile.birthday ?: "")
-            }
-
+    suspend fun getProfile() {
+        _isLoading.emit(true)
+        val res = repository.getProfile()?.profile_data
+        if (res == null)
+            _isLoading.emit(false)
+        res?.let { profile ->
+            _isLoading.emit(false)
+            _phone.emit(profile.phone)
+            _name.emit(profile.name)
+            _username.emit(profile.username)
+            _last.emit(profile.last ?: "")
+            _instagram.emit(profile.instagram ?: "")
+            _vk.emit(profile.vk ?: "")
+            _city.emit(profile.city ?: "")
+            _birthday.emit(profile.birthday ?: "2000-01-30")
         }
     }
+
 
     suspend fun logout() {
         repository.logout()
     }
 
-    suspend fun saveData(){
-
-    }
 }
