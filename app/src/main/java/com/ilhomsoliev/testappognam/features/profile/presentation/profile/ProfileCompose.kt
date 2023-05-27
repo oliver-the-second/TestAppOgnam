@@ -5,13 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Edit
@@ -21,16 +18,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ilhomsoliev.testappognam.features.profile.presentation.edit_profile.EditProfileCallback
-import com.ilhomsoliev.testappognam.features.profile.presentation.edit_profile.EditProfileState
+import com.ilhomsoliev.testappognam.R
 import com.ilhomsoliev.testappognam.shared.components.Loader
 
 
@@ -69,7 +66,8 @@ fun ProfileContent(
                 }) {
                     Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
                 }
-                Text(text = "Profile")
+                Text(text = "Profile", fontFamily = FontFamily(
+                    Font(R.font.roboto_regular)))
             }
         }, actions = {
             IconButton(onClick = {
@@ -92,19 +90,19 @@ fun ProfileContent(
                 .padding(it)
         ) {
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label= "Phone", state.phone)
+            ProfileProperty(label = "Phone", state.phone)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label= "Username", state.username)
+            ProfileProperty(label = "Username", state.username)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label= "Name", state.name)
+            ProfileProperty(label = "Name", state.name)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label= "City", state.city)
+            ProfileProperty(label = "City", state.city)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label= "Instagram", state.instagram)
+            ProfileProperty(label = "Instagram", state.instagram)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label= "Vk", state.vk)
+            ProfileProperty(label = "Vk", state.vk)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label= "Birthday", state.birthday)
+            ProfileProperty(label = "Birthday", state.birthday)
             Spacer(modifier = Modifier.height(120.dp))
         }
     }
@@ -121,7 +119,10 @@ fun ProfileProperty(
     value: String,
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(text = "$label: $value", fontSize = 24.sp, color = Color.Black)
+        Text(
+            text = "$label: $value", fontSize = 24.sp, color = Color.Black,
+            fontFamily = FontFamily(Font(R.font.roboto_regular))
+        )
     }
 
 }

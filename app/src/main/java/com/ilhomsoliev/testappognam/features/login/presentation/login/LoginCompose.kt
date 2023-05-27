@@ -19,8 +19,11 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ilhomsoliev.testappognam.R
 import com.ilhomsoliev.testappognam.features.login.presentation.login.components.PhoneField
 import com.ilhomsoliev.testappognam.shared.country.Country
 
@@ -61,7 +64,10 @@ fun LoginContent(
                     .padding(top = 36.dp)
             ) {
 
-                Text(text = "Login", fontSize = 24.sp, color = Color.Black)
+                Text(text = "Login", fontSize = 24.sp, color = Color.Black, fontFamily = FontFamily(
+                    Font(R.font.roboto_regular)
+                )
+                )
 
                 Spacer(modifier = Modifier.padding(12.dp))
 

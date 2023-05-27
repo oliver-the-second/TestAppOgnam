@@ -18,9 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ilhomsoliev.testappognam.R
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -65,7 +68,10 @@ fun LeftMessageItem(
                 )
                 CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {
                     SelectionContainer {
-                        Text(text = content, color = Color.Black, fontSize = textSize.sp)
+                        Text(text = content, color = Color.Black, fontSize = textSize.sp, fontFamily = FontFamily(
+                            Font(R.font.roboto_regular)
+                        )
+                        )
                     }
                 }
                 Text(

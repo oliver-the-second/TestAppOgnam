@@ -24,11 +24,14 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.text.input.KeyboardType.Companion.NumberPassword
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.ilhomsoliev.testappognam.R
 
 data class CodeState(
     val code: String,
@@ -152,7 +155,10 @@ private fun ButtonTimer(
             onClick = {
                 onResend()
             }) {
-            Text(text = "Repeat code")
+            Text(text = "Repeat code", fontFamily = FontFamily(
+                Font(R.font.roboto_regular)
+            )
+            )
         }
     }
 }

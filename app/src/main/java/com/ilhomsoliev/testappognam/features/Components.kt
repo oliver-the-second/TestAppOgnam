@@ -24,6 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ilhomsoliev.testappognam.R
@@ -116,7 +118,8 @@ private fun LabelBar(
     ) {
         Text(
             state.name ?: "", style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.tertiary, fontFamily = FontFamily(
+                Font(R.font.roboto_regular))
         )
         IconButton({
             state.state = true

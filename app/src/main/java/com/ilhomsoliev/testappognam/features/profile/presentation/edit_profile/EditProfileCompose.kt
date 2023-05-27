@@ -14,7 +14,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,8 +25,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ilhomsoliev.testappognam.R
 import com.ilhomsoliev.testappognam.shared.components.Loader
 
 
@@ -62,9 +64,6 @@ fun EditProfileContent(
     state: EditProfileState,
     callback: EditProfileCallback
 ) {
-    AnimatedVisibility(visible = state.isLoading) {
-        Loader()
-    }
 
     Scaffold(topBar = {
         TopAppBar(title = {
@@ -74,7 +73,11 @@ fun EditProfileContent(
                 }) {
                     Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
                 }
-                Text(text = "Edit Profile")
+                Text(
+                    text = "Edit Profile", fontFamily = FontFamily(
+                        Font(R.font.roboto_regular)
+                    )
+                )
             }
         })
     }) {
@@ -91,7 +94,11 @@ fun EditProfileContent(
                 onValueChange = {},
                 enabled = false,
                 label = {
-                    Text(text = "Phone", color = Color.Gray)
+                    Text(
+                        text = "Phone", color = Color.Gray, fontFamily = FontFamily(
+                            Font(R.font.roboto_regular)
+                        )
+                    )
                 }
             )
             Spacer(modifier = Modifier.height(12.dp))
@@ -101,13 +108,21 @@ fun EditProfileContent(
                 enabled = false,
                 onValueChange = {},
                 label = {
-                    Text(text = "Username", color = Color.Gray)
+                    Text(
+                        text = "Username", color = Color.Gray, fontFamily = FontFamily(
+                            Font(R.font.roboto_regular)
+                        )
+                    )
                 })
             Spacer(modifier = Modifier.height(12.dp))
             TextField(modifier = Modifier.fillMaxWidth(), value = state.name, onValueChange = {
                 callback.onNameChange(it)
             }, label = {
-                Text(text = "Name", color = Color.Gray)
+                Text(
+                    text = "Name", color = Color.Gray, fontFamily = FontFamily(
+                        Font(R.font.roboto_regular)
+                    )
+                )
             })
             Spacer(modifier = Modifier.height(12.dp))
             TextField(
@@ -117,7 +132,11 @@ fun EditProfileContent(
                     callback.onCityChange(it)
                 },
                 label = {
-                    Text(text = "City", color = Color.Gray)
+                    Text(
+                        text = "City", color = Color.Gray, fontFamily = FontFamily(
+                            Font(R.font.roboto_regular)
+                        )
+                    )
                 })
             Spacer(modifier = Modifier.height(12.dp))
             TextField(
@@ -128,7 +147,11 @@ fun EditProfileContent(
 
                 },
                 label = {
-                    Text(text = "Instagram", color = Color.Gray)
+                    Text(
+                        text = "Instagram", color = Color.Gray, fontFamily = FontFamily(
+                            Font(R.font.roboto_regular)
+                        )
+                    )
                 })
             Spacer(modifier = Modifier.height(12.dp))
             TextField(
@@ -138,7 +161,11 @@ fun EditProfileContent(
                     callback.onVkChange(it)
                 },
                 label = {
-                    Text(text = "Vk", color = Color.Gray)
+                    Text(
+                        text = "Vk", color = Color.Gray, fontFamily = FontFamily(
+                            Font(R.font.roboto_regular)
+                        )
+                    )
                 })
             Spacer(modifier = Modifier.height(12.dp))
             TextField(
@@ -148,7 +175,11 @@ fun EditProfileContent(
                     callback.onBirthdayChange(it)
                 },
                 label = {
-                    Text(text = "Birthday", color = Color.Gray)
+                    Text(
+                        text = "Birthday", color = Color.Gray, fontFamily = FontFamily(
+                            Font(R.font.roboto_regular)
+                        )
+                    )
                 })
             Spacer(modifier = Modifier.height(12.dp))
             Button(
@@ -168,6 +199,9 @@ fun EditProfileContent(
             }
             Spacer(modifier = Modifier.height(120.dp))
         }
+    }
+    AnimatedVisibility(visible = state.isLoading) {
+        Loader()
     }
 
 }

@@ -19,8 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ilhomsoliev.testappognam.R
 
 data class AuthProfileState(
     val phone: String,
@@ -58,20 +61,26 @@ fun AuthProfileContent(
                     .padding(horizontal = 16.dp)
                     .padding(top = 36.dp)
             ) {
-                Text(text = "New User", fontSize = 24.sp, color = Color.Black)
+                Text(text = "New User", fontSize = 24.sp, color = Color.Black, fontFamily = FontFamily(
+                    Font(R.font.roboto_regular)
+                )
+                )
 
                 Spacer(modifier = Modifier.padding(12.dp))
                 TextField(modifier = Modifier.fillMaxWidth(), value = state.phone, enabled = false, onValueChange = {}, label = {
-                    Text(text = "Phone")
+                    Text(text = "Phone", fontFamily = FontFamily(
+                        Font(R.font.roboto_regular)))
                 })
                 Spacer(modifier = Modifier.padding(12.dp))
                 TextField(modifier = Modifier.fillMaxWidth(), value = state.name, onValueChange = { callback?.onNameChange(it) },
                     label = {
-                    Text(text = "Name",color = Color.Gray)
+                    Text(text = "Name",color = Color.Gray, fontFamily = FontFamily(
+                        Font(R.font.roboto_regular)))
                 })
                 Spacer(modifier = Modifier.padding(12.dp))
                 TextField(modifier = Modifier.fillMaxWidth(), value = state.username, onValueChange = { callback?.onUsernameChange(it) }, label = {
-                    Text(text = "Username", color = Color.Gray)
+                    Text(text = "Username", color = Color.Gray,fontFamily = FontFamily(
+                            Font(R.font.roboto_regular)))
                 })
                 Spacer(modifier = Modifier.padding(12.dp))
                 Button(

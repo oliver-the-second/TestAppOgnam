@@ -15,6 +15,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import com.ilhomsoliev.testappognam.R
 import com.ilhomsoliev.testappognam.features.chat.presentation.components.ChatItem
 
 data class ChatListState(
@@ -35,7 +38,10 @@ fun ChatListContent(
 ) {
     Scaffold(topBar = {
         TopAppBar(title = {
-            Text(text = "Chat List")
+            Text(text = "Chat List", fontFamily = FontFamily(
+                Font(R.font.roboto_regular)
+            )
+            )
         }, actions = {
             IconButton(onClick = {
                 callback.onProfileClick()
