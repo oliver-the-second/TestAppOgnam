@@ -79,7 +79,8 @@ class EditProfileViewModel(
     }
 
     suspend fun saveData() = withContext(IO) {
-        repository.updateProfile(
+        _isLoading.emit(true)
+        val res = repository.updateProfile(
             avatar = if (_avatar.value.first.isNotEmpty() && _avatar.value.second.isNotEmpty()) Avatar(
                 _avatar.value.second,
                 _avatar.value.first
@@ -92,6 +93,7 @@ class EditProfileViewModel(
             username = _username.value,
             vk = _vk.value,
         )
+        _isLoading.emit(false)
     }
 
     suspend fun onNameChange(value: String) {

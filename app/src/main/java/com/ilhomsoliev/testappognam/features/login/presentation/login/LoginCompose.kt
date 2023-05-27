@@ -64,9 +64,13 @@ fun LoginContent(
                     .padding(top = 36.dp)
             ) {
 
-                Text(text = "Авторизоваться", fontSize = 24.sp, color = Color.Black, fontFamily = FontFamily(
-                    Font(R.font.roboto_regular)
-                )
+                Text(
+                    text = "Авторизоваться",
+                    fontSize = 24.sp,
+                    color = Color.Black,
+                    fontFamily = FontFamily(
+                        Font(R.font.roboto_regular)
+                    )
                 )
 
                 Spacer(modifier = Modifier.padding(12.dp))

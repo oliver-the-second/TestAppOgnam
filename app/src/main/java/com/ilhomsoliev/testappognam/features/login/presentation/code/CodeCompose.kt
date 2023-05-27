@@ -114,12 +114,12 @@ private fun DigitCode(
                     code[index].toString() else "",
                 { onChange(index, it) }, modifier
                     .clip(shapes.large)
-                    .size(60.dp)
+                    .size(50.dp)
                     .focusRequester(focus),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = NumberPassword
                 ),
-                singleLine = true
+                singleLine = true,
             )
         }
     }

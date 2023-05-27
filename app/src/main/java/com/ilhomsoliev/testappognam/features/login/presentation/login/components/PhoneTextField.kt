@@ -60,7 +60,7 @@ fun PhoneField(
         Row(
             Modifier
                 .fillMaxWidth()
-                .background(colorScheme.onPrimaryContainer),
+                .background(colorScheme.primaryContainer),
             Arrangement.Start, Alignment.CenterVertically
         ) {
             Image(
