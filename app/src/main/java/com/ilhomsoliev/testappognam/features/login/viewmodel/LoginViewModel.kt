@@ -16,7 +16,6 @@ class LoginViewModel(
     private val repository: LoginRepository,
     private val countryManager: CountryManager,
 ): ViewModel() {
-    
     init {
         viewModelScope.launch {
             if(_country.value.code == "NONE")
@@ -50,8 +49,13 @@ class LoginViewModel(
     }
 
     suspend fun clearPhone() {
-        _phone.emit("")
-        _phone.emit(country.value.clearPhoneDial)
+        try {
+            _phone.emit("")
+            _phone.emit(country.value.clearPhoneDial)
+        }catch (e:Exception){
+
+        }
+
     }
     
     suspend fun sendCode(): String? = withContext(IO){

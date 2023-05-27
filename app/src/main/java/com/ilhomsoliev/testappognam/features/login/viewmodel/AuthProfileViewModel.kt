@@ -26,7 +26,7 @@ class AuthProfileViewModel(
 
     init {
         viewModelScope.launch {
-            _phone.emit(dataStoreManager.getPhone()?:"")
+            _phone.emit(dataStoreManager.getPhone())
         }
     }
 

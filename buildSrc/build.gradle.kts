@@ -19,7 +19,4 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin-api:$kotlinVer")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVer")
-
-    implementation("com.github.triplet.gradle:play-publisher:3.7.0")
-    implementation("io.realm.kotlin:gradle-plugin:1.5.0")
 }

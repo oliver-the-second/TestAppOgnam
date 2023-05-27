@@ -4,6 +4,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,6 +13,7 @@ import com.google.accompanist.navigation.material.BottomSheetNavigator
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.bottomSheet
+import com.ilhomsoliev.testappognam.data.local.DataStoreManager
 import com.ilhomsoliev.testappognam.features.chat.presentation.chat.ChatScreen
 import com.ilhomsoliev.testappognam.features.chat.presentation.chat_list.ChatListScreen
 import com.ilhomsoliev.testappognam.features.chat.viewmodel.ChatListViewModel
@@ -30,6 +32,7 @@ import com.ilhomsoliev.testappognam.features.login.presentation.code.CodeScreen
 import com.ilhomsoliev.testappognam.features.login.viewmodel.AuthProfileViewModel
 import com.ilhomsoliev.testappognam.features.profile.presentation.ProfileScreen
 import com.ilhomsoliev.testappognam.features.profile.viewmodel.ProfileViewModel
+import org.koin.mp.KoinPlatformTools
 
 val _country = MutableStateFlow(Country())
 val country = _country.asStateFlow()
@@ -45,6 +48,14 @@ fun Navigation() {
         BottomSheetNavigator(sheetState)
     }
     val navController = rememberNavController(bottomSheetNavigator)
+    val dataStore by lazy { KoinPlatformTools.defaultContext().get().get<DataStoreManager>()  }
+
+    LaunchedEffect(key1 = Unit, block = {
+        if(dataStore.getToken().isNotEmpty()){
+            navController.navigate(Screens.ChatList)
+        }
+    })
+
     ModalBottomSheetLayout(bottomSheetNavigator) {
         NavHost(navController = navController, startDestination = Screens.Login) {
             composable(route = Screens.Login) {

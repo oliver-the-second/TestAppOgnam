@@ -36,12 +36,12 @@ class DataStoreManager(private val context: Context) {
     }
 
     suspend fun getToken() = withContext(IO){
-        context.dataStore.data.first()[token_key]
+        context.dataStore.data.first()[token_key]?:""
     }
     suspend fun getRefreshToken() = withContext(IO){
-        context.dataStore.data.first()[refresh_token_key]
+        context.dataStore.data.first()[refresh_token_key]?:""
     }
     suspend fun getPhone() = withContext(IO){
-        context.dataStore.data.first()[phone_key]
+        context.dataStore.data.first()[phone_key]?:""
     }
 }

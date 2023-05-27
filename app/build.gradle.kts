@@ -2,14 +2,11 @@
 
 buildscript {
     dependencies {
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
     }
 }
 
 plugins {
-   // id("com.google.gms.google-services") version "4.3.15"
     id("com.android.application")
-    id("androidx.navigation.safeargs")
     kotlin("android")
 }
 

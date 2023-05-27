@@ -25,7 +25,8 @@ class LoginRepository(
     }
 
     suspend fun checkAuthCode(code: String) = withContext(IO) {
-        val phone = dataStoreManager.getPhone() ?: return@withContext null
+        val phone = dataStoreManager.getPhone()
+        if (phone.isEmpty()) return@withContext null
         try {
             val response = api.checkAuthCode(CheckAuthCodeRequest(phone, code))
             dataStoreManager.changeToken(response.access_token)
@@ -38,7 +39,8 @@ class LoginRepository(
     }
 
     suspend fun register(name: String, username: String) = withContext(IO) {
-        val phone = dataStoreManager.getPhone() ?: return@withContext null
+        val phone = dataStoreManager.getPhone()
+        if (phone.isEmpty()) return@withContext null
         try {
             val response = api.register(RegisterRequest(name, phone, username))
             dataStoreManager.changeToken(response.access_token)

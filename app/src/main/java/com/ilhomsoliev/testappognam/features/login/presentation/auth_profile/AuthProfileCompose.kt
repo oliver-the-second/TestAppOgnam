@@ -61,15 +61,16 @@ fun AuthProfileContent(
                 Text(text = "New User", fontSize = 24.sp, color = Color.Black)
 
                 Spacer(modifier = Modifier.padding(12.dp))
-                TextField(modifier = Modifier.fillMaxWidth(), value = state.phone, enabled = false, onValueChange = {}, placeholder = {
+                TextField(modifier = Modifier.fillMaxWidth(), value = state.phone, enabled = false, onValueChange = {}, label = {
                     Text(text = "Phone")
                 })
                 Spacer(modifier = Modifier.padding(12.dp))
-                TextField(modifier = Modifier.fillMaxWidth(), value = state.name, onValueChange = { callback?.onNameChange(it) }, placeholder = {
+                TextField(modifier = Modifier.fillMaxWidth(), value = state.name, onValueChange = { callback?.onNameChange(it) },
+                    label = {
                     Text(text = "Name",color = Color.Gray)
                 })
                 Spacer(modifier = Modifier.padding(12.dp))
-                TextField(modifier = Modifier.fillMaxWidth(), value = state.username, onValueChange = { callback?.onUsernameChange(it) }, placeholder = {
+                TextField(modifier = Modifier.fillMaxWidth(), value = state.username, onValueChange = { callback?.onUsernameChange(it) }, label = {
                     Text(text = "Username", color = Color.Gray)
                 })
                 Spacer(modifier = Modifier.padding(12.dp))

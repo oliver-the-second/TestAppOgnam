@@ -1,5 +1,6 @@
 package com.ilhomsoliev.testappognam.data.repository
 
+import android.util.Log
 import com.ilhomsoliev.testappognam.data.local.DataStoreManager
 import com.ilhomsoliev.testappognam.data.network.ServerApi
 import com.ilhomsoliev.testappognam.data.network.dto.request.updateProfile.Avatar
@@ -12,10 +13,15 @@ class ProfileRepository(
     private val dataStoreManager: DataStoreManager,
 ) {
     suspend fun getProfile() = withContext(IO) {
-        val token = dataStoreManager.getToken() ?: return@withContext null
+        val token = dataStoreManager.getToken()
+        Log.d("Hello", "Token: $token")
+        if (token.isEmpty()) return@withContext null
         try {
-            api.getProfile(token)
+            val res = api.getProfile("Bearer $token")
+            Log.d("Hello", res.profile_data.phone)
+            res
         } catch (e: Exception) {
+            Log.d("Hello", e.message.toString())
             null
         }
     }
@@ -30,7 +36,8 @@ class ProfileRepository(
         username: String,
         vk: String
     ) = withContext(IO) {
-        val token = dataStoreManager.getToken() ?: return@withContext null
+        val token = dataStoreManager.getToken()
+        if (token.isEmpty())return@withContext null
         try {
             api.updateProfile(
                 token, UpdateProfileRequest(
@@ -49,16 +56,23 @@ class ProfileRepository(
         }
     }
 
-    suspend fun refreshToken() = withContext(IO){
-        val refreshToken = dataStoreManager.getRefreshToken()?:return@withContext
+    suspend fun refreshToken() = withContext(IO) {
+        val refreshToken = dataStoreManager.getRefreshToken()
+        if(refreshToken.isEmpty())return@withContext
         try {
             val res = api.refreshToken(refreshToken)
             dataStoreManager.changeToken(res.access_token)
             dataStoreManager.changeToken(res.refresh_token)
             res
-        }catch (e:Exception){
+        } catch (e: Exception) {
             null
         }
+    }
+
+    suspend fun logout() = withContext(IO) {
+        dataStoreManager.changeToken("")
+        dataStoreManager.changePhone("")
+        dataStoreManager.changeRefreshToken("")
     }
 
 }

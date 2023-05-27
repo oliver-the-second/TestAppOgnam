@@ -5,12 +5,9 @@ import org.gradle.kotlin.dsl.project
 val navigationVer = "2.5.3"
 fun DependencyHandlerScope.androidBase(excludeCore: Boolean = false) {
     implementation(
-        "com.google.android.gms:play-services-location:21.0.1",
         "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1",
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4",
         "androidx.core:core-ktx:1.9.0",
-        "androidx.navigation:navigation-fragment-ktx:$navigationVer",
-        "androidx.navigation:navigation-ui-ktx:$navigationVer",
     )
     koin()
     paging()

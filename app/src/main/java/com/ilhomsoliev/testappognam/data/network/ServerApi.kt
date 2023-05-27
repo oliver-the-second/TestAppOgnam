@@ -48,7 +48,7 @@ interface ServerApi {
         request: CheckAuthCodeRequest
     ): CheckAuthCodeResponse
 
-    @HTTP(method = "GET", path = "users/me/", hasBody = true)
+    @HTTP(method = "GET", path = "users/me/", hasBody = false)
     @Headers(
         "accept: application/json",
         "Content-Type: application/json"
@@ -68,7 +68,7 @@ interface ServerApi {
         request: UpdateProfileRequest
     ): UpdateProfileResponse
 
-    @HTTP(method = "GET", path = "users/refresh-token/", hasBody = true)
+    @HTTP(method = "GET", path = "users/refresh-token/", hasBody = false)
     @Headers(
         "accept: application/json",
         "Content-Type: application/json"
