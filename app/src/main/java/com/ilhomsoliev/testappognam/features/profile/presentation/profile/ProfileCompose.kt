@@ -60,9 +60,6 @@ fun ProfileContent(
     state: ProfileState,
     callback: ProfileCallback
 ) {
-    AnimatedVisibility(visible = state.isLoading) {
-        Loader()
-    }
 
     Scaffold(topBar = {
         TopAppBar(title = {
@@ -110,6 +107,10 @@ fun ProfileContent(
             ProfileProperty(label= "Birthday", state.birthday)
             Spacer(modifier = Modifier.height(120.dp))
         }
+    }
+
+    AnimatedVisibility(visible = state.isLoading) {
+        Loader()
     }
 
 }

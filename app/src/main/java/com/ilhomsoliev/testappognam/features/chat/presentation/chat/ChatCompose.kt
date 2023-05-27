@@ -1,14 +1,21 @@
 package com.ilhomsoliev.testappognam.features.chat.presentation.chat
 
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
@@ -26,9 +33,11 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,29 +48,44 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ilhomsoliev.testappognam.features.chat.presentation.chat.chatField.ChatInput
+import com.ilhomsoliev.testappognam.features.chat.presentation.chat.components.LeftMessageItem
+import com.ilhomsoliev.testappognam.features.chat.presentation.chat.components.RightMessageItem
+import com.ilhomsoliev.testappognam.features.chat.presentation.chat.components.chatField.ChatInput
+import com.ilhomsoliev.testappognam.features.chat.presentation.chat.model.DemoMessages
+import com.ilhomsoliev.testappognam.features.chat.presentation.chat.model.Message
 import com.ilhomsoliev.testappognam.shared.components.ImageBox
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+
 
 data class ChatState(
     val isLoading: Boolean = false,
-    val imageUrl: String ,
+    val imageUrl: String,
     val chatName:String = "Chat name",
     val curMessage:String = "Chat name",
+    var messages: List<Message> = DemoMessages,
 )
 
 interface ChatCallback {
 
     fun onBack()
     fun onMessageChange(value:String)
+    fun onMessageSend()
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ChatContent(
     state: ChatState,
     callback: ChatCallback
 ) {
     var isDropDownMenuActive by remember { mutableStateOf(false) }
+    val scrollState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(key1 = false, block = {
+        scrollState.animateScrollToItem(scrollState.layoutInfo.totalItemsCount)
+    })
 
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
         TopAppBar(modifier = Modifier
@@ -131,26 +155,61 @@ fun ChatContent(
 
                 }
             })
-    },bottomBar = {
+    }, bottomBar = {
         ChatInput(
             value = state.curMessage,
             isLoading = state.isLoading,
             onClick = {
-/*                coroutineScope.launch {
+                callback.onMessageSend()
+                scope.launch {
                     scrollState.animateScrollToItem(if (state.messages.isNotEmpty()) state.messages.size - 1 else 0)
-                }*/
+                }
             },
             onValueChange = {
                 callback.onMessageChange(it)
             }
         )
     }) {
-        Column(modifier = Modifier.fillMaxSize().padding(it)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Gray)
+                .padding(it),
+            contentAlignment = if (state.messages.isNotEmpty()) Alignment.TopCenter else Alignment.TopCenter
+        ) {
+            LazyColumn(
+                modifier = Modifier,
+                state = scrollState,
+            ) {
+                items(state.messages, key = {
+                    it.id ?: 1
+                }) {
+                    if (it.owner == "LEFT") {
+                        LeftMessageItem(
+                            modifier = Modifier
+                                .padding(horizontal = 12.dp)
+                                .animateItemPlacement(animationSpec = tween(durationMillis = 200)),
+                            content = it.content,
+                            date = it.dateCreated.toTimeHoursAndMinutes(),
+                            textSize = 16,
+                            textCorner = 12,
+                        )
+                    } else {
+                        RightMessageItem(
+                            modifier = Modifier.padding(end = 12.dp),
+                            content = it.content,
+                            date = it.dateCreated.toTimeHoursAndMinutes(),
+                            textSize = 16,
+                            textCorner = 12,
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
+            }
 
         }
 
     }
-
 }
 
 @Composable
@@ -175,5 +234,8 @@ fun IconWithText(
             color = Color.Black
         )
     }
-
+}
+fun Long.toTimeHoursAndMinutes(): String {
+    val formatter = SimpleDateFormat("HH:mm")
+    return formatter.format(this)
 }

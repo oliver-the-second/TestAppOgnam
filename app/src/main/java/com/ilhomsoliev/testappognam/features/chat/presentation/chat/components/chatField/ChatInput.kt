@@ -1,4 +1,4 @@
-package com.ilhomsoliev.testappognam.features.chat.presentation.chat.chatField
+package com.ilhomsoliev.testappognam.features.chat.presentation.chat.components.chatField
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -33,6 +33,8 @@ internal fun ChatInput(
         verticalAlignment = Alignment.Bottom
     ) {
 
+        Spacer(modifier = Modifier.width(12.dp))
+
         ChatTextField(
             modifier = modifier.weight(1f),
             input = value,
@@ -41,7 +43,9 @@ internal fun ChatInput(
         )
 
         if (isLoading) {
-            CircularProgressIndicator(modifier = Modifier.size(48.dp).padding(6.dp))
+            CircularProgressIndicator(modifier = Modifier
+                .size(48.dp)
+                .padding(6.dp))
         } else {
 
             CustomIconButton(
