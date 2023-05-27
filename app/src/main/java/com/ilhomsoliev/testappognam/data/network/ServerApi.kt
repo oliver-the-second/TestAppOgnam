@@ -68,14 +68,18 @@ interface ServerApi {
         request: UpdateProfileRequest
     ): UpdateProfileResponse
 
-    @HTTP(method = "GET", path = "users/refresh-token/", hasBody = false)
+    @HTTP(method = "POST", path = "users/refresh-token/", hasBody = true)
     @Headers(
         "accept: application/json",
         "Content-Type: application/json"
     )
     suspend fun refreshToken(
         @Body
-        refresh_token: String
+        refresh_token: RefreshTokenRequest
     ): RefreshTokenResponse
 
 }
+
+data class RefreshTokenRequest(
+    val refresh_token: String
+)

@@ -12,6 +12,7 @@ import com.ilhomsoliev.testappognam.features.login.viewmodel.AuthProfileViewMode
 import com.ilhomsoliev.testappognam.features.login.viewmodel.CodeViewModel
 import com.ilhomsoliev.testappognam.features.login.viewmodel.CountryBsViewModel
 import com.ilhomsoliev.testappognam.features.login.viewmodel.LoginViewModel
+import com.ilhomsoliev.testappognam.features.profile.viewmodel.EditProfileViewModel
 import com.ilhomsoliev.testappognam.features.profile.viewmodel.ProfileViewModel
 import com.ilhomsoliev.testappognam.shared.country.CountryManager
 import okhttp3.OkHttpClient
@@ -76,6 +77,9 @@ class OgnamApplication : Application() {
             }
             viewModel {
                 ChatViewModel()
+            }
+            viewModel {
+                EditProfileViewModel(get())
             }
             viewModel {
                 ProfileViewModel(get())

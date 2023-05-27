@@ -30,7 +30,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import org.koin.androidx.compose.koinViewModel
 import com.ilhomsoliev.testappognam.features.login.presentation.code.CodeScreen
 import com.ilhomsoliev.testappognam.features.login.viewmodel.AuthProfileViewModel
-import com.ilhomsoliev.testappognam.features.profile.presentation.ProfileScreen
+import com.ilhomsoliev.testappognam.features.profile.presentation.edit_profile.EditProfileScreen
+import com.ilhomsoliev.testappognam.features.profile.presentation.profile.ProfileScreen
+import com.ilhomsoliev.testappognam.features.profile.viewmodel.EditProfileViewModel
 import com.ilhomsoliev.testappognam.features.profile.viewmodel.ProfileViewModel
 import org.koin.mp.KoinPlatformTools
 
@@ -86,6 +88,10 @@ fun Navigation() {
             composable(Screens.Profile){
                 val viewModel = koinViewModel<ProfileViewModel>()
                 ProfileScreen(vm = viewModel, navController = navController)
+            }
+            composable(Screens.EditProfile){
+                val viewModel = koinViewModel<EditProfileViewModel>()
+                EditProfileScreen(vm = viewModel, navController = navController)
             }
         }
     }

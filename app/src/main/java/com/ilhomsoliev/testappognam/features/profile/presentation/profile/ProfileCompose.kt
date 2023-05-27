@@ -1,4 +1,4 @@
-package com.ilhomsoliev.testappognam.features.profile.presentation
+package com.ilhomsoliev.testappognam.features.profile.presentation.profile
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
@@ -8,8 +8,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -23,6 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.ilhomsoliev.testappognam.features.profile.presentation.edit_profile.EditProfileCallback
+import com.ilhomsoliev.testappognam.features.profile.presentation.edit_profile.EditProfileState
 import com.ilhomsoliev.testappognam.shared.components.Loader
 
 
@@ -36,13 +44,15 @@ data class ProfileState(
     val isOnline: Boolean,
     val city: String,
     val birthday: String,
-    val isLoading:Boolean
+    val isLoading: Boolean
 )
 
 interface ProfileCallback {
     fun onLogout()
     fun onBack()
+    fun onEditProfile()
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,7 +66,7 @@ fun ProfileContent(
 
     Scaffold(topBar = {
         TopAppBar(title = {
-            Row(verticalAlignment = Alignment.CenterVertically){
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = {
                     callback.onBack()
                 }) {
@@ -65,6 +75,11 @@ fun ProfileContent(
                 Text(text = "Profile")
             }
         }, actions = {
+            IconButton(onClick = {
+                callback.onEditProfile()
+            }) {
+                Icon(imageVector = Icons.Default.Edit, contentDescription = null)
+            }
             IconButton(onClick = {
                 callback.onLogout()
             }) {
@@ -75,49 +90,37 @@ fun ProfileContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 12.dp)
                 .padding(it)
         ) {
-            TextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = state.phone,
-                onValueChange = {},
-                enabled = false,
-                label = {
-                    Text(text = "Phone", color = Color.Gray)
-                }
-            )
             Spacer(modifier = Modifier.height(12.dp))
-            TextField(modifier = Modifier.fillMaxWidth(), value = state.username, enabled = false, onValueChange = {}, label = {
-                Text(text = "Username", color = Color.Gray)
-            })
+            ProfileProperty(label= "Phone", state.phone)
             Spacer(modifier = Modifier.height(12.dp))
-            TextField(modifier = Modifier.fillMaxWidth(), value = state.name, onValueChange = {},label = {
-                Text(text = "Name", color = Color.Gray)
-            })
+            ProfileProperty(label= "Username", state.username)
             Spacer(modifier = Modifier.height(12.dp))
-            TextField(modifier = Modifier.fillMaxWidth(), value = state.last, onValueChange = {},label = {
-                Text(text = "Lastname", color = Color.Gray)
-            })
+            ProfileProperty(label= "Name", state.name)
             Spacer(modifier = Modifier.height(12.dp))
-            TextField(modifier = Modifier.fillMaxWidth(), value = state.city, onValueChange = {},label = {
-                Text(text = "City", color = Color.Gray)
-            })
+            ProfileProperty(label= "City", state.city)
             Spacer(modifier = Modifier.height(12.dp))
-            TextField(modifier = Modifier.fillMaxWidth(), value = state.instagram, onValueChange = {},label = {
-                Text(text = "Instagram", color = Color.Gray)
-            })
+            ProfileProperty(label= "Instagram", state.instagram)
             Spacer(modifier = Modifier.height(12.dp))
-            TextField(modifier = Modifier.fillMaxWidth(), value = state.vk, onValueChange = {},label = {
-                Text(text = "Vk", color = Color.Gray)
-            })
+            ProfileProperty(label= "Vk", state.vk)
             Spacer(modifier = Modifier.height(12.dp))
-            TextField(modifier = Modifier.fillMaxWidth(), value = state.birthday, onValueChange = {},label = {
-                Text(text = "Birthday", color = Color.Gray)
-            })
-            Spacer(modifier = Modifier.height(12.dp))
-
+            ProfileProperty(label= "Birthday", state.birthday)
+            Spacer(modifier = Modifier.height(120.dp))
         }
+    }
+
+}
+
+@Composable
+fun ProfileProperty(
+    label: String,
+    value: String,
+) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(text = "$label: $value", fontSize = 24.sp, color = Color.Black)
     }
 
 }

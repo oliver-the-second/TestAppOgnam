@@ -2,10 +2,12 @@ package com.ilhomsoliev.testappognam.data.repository
 
 import android.util.Log
 import com.ilhomsoliev.testappognam.data.local.DataStoreManager
+import com.ilhomsoliev.testappognam.data.network.RefreshTokenRequest
 import com.ilhomsoliev.testappognam.data.network.ServerApi
 import com.ilhomsoliev.testappognam.data.network.dto.request.updateProfile.Avatar
 import com.ilhomsoliev.testappognam.data.network.dto.request.updateProfile.UpdateProfileRequest
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 class ProfileRepository(
@@ -28,7 +30,7 @@ class ProfileRepository(
     }
 
     suspend fun updateProfile(
-        avatar: Avatar,
+        avatar: Avatar?,
         birthday: String,
         city: String,
         instagram: String,
@@ -58,16 +60,17 @@ class ProfileRepository(
         }
     }
 
-    suspend fun refreshToken() = withContext(IO) {
+    private suspend fun refreshToken() = withContext(IO) {
         val refreshToken = dataStoreManager.getRefreshToken()
         if(refreshToken.isEmpty())return@withContext
         try {
-            val res = api.refreshToken(refreshToken)
+            val res = api.refreshToken(RefreshTokenRequest(refreshToken))
             dataStoreManager.changeToken(res.access_token)
-            dataStoreManager.changeToken(res.refresh_token)
+            dataStoreManager.changeRefreshToken(res.refresh_token)
             res
         } catch (e: Exception) {
-            null
+            Log.d("Hello", "Refresh Exception ${e.message}")
+            ""
         }
     }
 

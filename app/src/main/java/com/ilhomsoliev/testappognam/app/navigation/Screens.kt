@@ -6,6 +6,7 @@ object Screens {
     const val Code = "Code"
     const val AuthProfile = "AuthProfile"
     const val Profile = "Profile"
+    const val EditProfile = "EditProfile"
     const val ChatList = "ChatList"
     const val Chat = "Chat"
 }
