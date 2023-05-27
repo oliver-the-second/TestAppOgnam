@@ -1,148 +1,151 @@
-object Dependencies {
-    val android = AndroidDependencies
-    val coroutines = CoroutinesDependencies
-    val compose = ComposeDependencies
-    val test = TestDependencies
-    val accompanist = AccompanistDependencies
-    val network = NetworkDependencies
-    val imageLoader = ImageLoaderDependencies
-    val paging = PagingDependencies
-    val googleServices = GoogleServicesDependencies
-    val map = MapDependencies
+import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.DependencyHandlerScope
+import org.gradle.kotlin.dsl.project
+
+val navigationVer = "2.5.3"
+fun DependencyHandlerScope.androidBase(excludeCore: Boolean = false) {
+    implementation(
+        "com.google.android.gms:play-services-location:21.0.1",
+        "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4",
+        "androidx.core:core-ktx:1.9.0",
+        "androidx.navigation:navigation-fragment-ktx:$navigationVer",
+        "androidx.navigation:navigation-ui-ktx:$navigationVer",
+    )
+    koin()
+    paging()
+    yandexmap()
 }
 
-object MapDependencies{
-    const val osmdroid = "org.osmdroid:osmdroid-android:${Versions.map.osmdroid}"
-    const val osmdroidMapForge= "org.osmdroid:osmdroid-mapsforge:${Versions.map.osmdroidMapForge}"
-    const val mapForgeMapAndroid = "org.mapsforge:mapsforge-map-android:${Versions.map.mapForgeMapAndroid}"
-    const val mapForgeMap = "org.mapsforge:mapsforge-map:${Versions.map.mapForgeMap}"
-    const val mapForgeThemes = "org.mapsforge:mapsforge-themes:${Versions.map.mapForgeThemes}"
-    const val androidLegacy = "androidx.legacy:legacy-support-v4:${Versions.map.androidLegacy}"
+private fun DependencyHandlerScope.yandexmap() = implementation(
+    "com.yandex.android:maps.mobile:4.3.1-full"
+)
+
+private const val composeVer = Config.composeUiVer
+private const val materialVer = "1.0.1"
+fun DependencyHandlerScope.compose() = implementation(
+    "androidx.compose.material3:material3:$materialVer",
+    "androidx.compose.material3:material3-window-size-class:$materialVer",
+    "androidx.navigation:navigation-compose:2.5.2",
+    "com.google.accompanist:accompanist-navigation-material:0.30.0",
+    "androidx.activity:activity-compose:1.6.0",
+    "androidx.compose.ui:ui:$composeVer",
+    "io.coil-kt:coil-compose:2.3.0",
+) and implementation(
+    "androidx.compose.ui:ui-test-manifest:$composeVer",
+    "androidx.compose.ui:ui-tooling-preview:$composeVer",
+    "androidx.compose.ui:ui-tooling:$composeVer",
+) and accompanist(
+) and accompanistPermissions(
+) and firebase(
+) and swipeRefresher(
+) and lottie()
+
+val pagingVer = "3.1.1"
+
+fun DependencyHandlerScope.imageCropper() = implementation(
+    "com.github.SmartToolFactory:Compose-Colorful-Sliders:1.1.0",
+    "com.github.SmartToolFactory:Compose-Color-Picker-Bundle:1.0.1",
+    "com.github.SmartToolFactory:Compose-Extended-Gestures:2.1.0",
+    "com.github.SmartToolFactory:Compose-AnimatedList:0.5.1",
+)
+
+fun DependencyHandlerScope.compressor() = implementation(
+    "id.zelory:compressor:3.0.1"
+)
+
+fun DependencyHandlerScope.lottie() = implementation(
+    "com.airbnb.android:lottie-compose:5.2.0"
+)
+
+fun DependencyHandlerScope.paging() = implementation(
+    "androidx.paging:paging-compose:1.0.0-alpha17"
+)
+
+fun DependencyHandlerScope.swipeRefresher() = implementation(
+    "com.google.accompanist:accompanist-swiperefresh:0.24.13-rc"
+)
+
+fun DependencyHandlerScope.firebase() = implementation(
+    "com.google.firebase:firebase-messaging:23.1.1",
+    "com.google.firebase:firebase-analytics:21.2.0",
+    "com.google.firebase:firebase-bom:31.2.0",
+)
+
+fun DependencyHandlerScope.accompanist() = implementation(
+    "com.google.accompanist:accompanist-systemuicontroller:0.26.5-rc",
+    "com.google.accompanist:accompanist-pager:0.28.0",
+    "com.google.accompanist:accompanist-pager-indicators:0.28.0"
+)
+
+const val accompanistPermissionsVer = "0.20.3"
+fun DependencyHandlerScope.accompanistPermissions() = implementation(
+    "com.google.accompanist:accompanist-permissions:$accompanistPermissionsVer"
+)
+
+const val koinVer = "3.2.1"
+fun DependencyHandlerScope.koin() = implementation(
+    "io.insert-koin:koin-androidx-compose:$koinVer",
+    "io.insert-koin:koin-android:$koinVer",
+    "io.insert-koin:koin-core:$koinVer",
+)
+
+fun DependencyHandlerScope.dataBase() =
+    realm() and retrofit() and dataStore()
+/*
+and implementation(
+        project(":data:realm"),
+        project(":data:ktor")
+    )
+*/
+
+fun DependencyHandlerScope.realm() = implementation(
+    "io.realm.kotlin:library-base:1.5.0"
+)
+
+
+val jacksonVer = "2.14.0"
+fun DependencyHandlerScope.jackson() = implementation(
+    "com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:$jacksonVer",
+    "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVer"
+)
+val retrofitVer = "2.9.0"
+
+fun DependencyHandlerScope.retrofit() = implementation(
+    "com.squareup.retrofit2:retrofit:$retrofitVer",
+    "com.squareup.retrofit2:converter-scalars:2.1.0",
+    "com.squareup.retrofit2:converter-gson:$retrofitVer",
+    "com.squareup.okhttp3:okhttp:5.0.0-alpha.2",
+    "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2",
+)
+val dataStoreVer = "1.0.0"
+
+fun DependencyHandlerScope.dataStore() = implementation(
+    "androidx.datastore:datastore-preferences:${dataStoreVer}"
+)
+
+
+val ktorVer = "2.2.1"
+fun DependencyHandlerScope.ktor() = implementation(
+    "io.ktor:ktor-client-content-negotiation:$ktorVer",
+    "io.ktor:ktor-serialization-jackson:$ktorVer",
+    "io.ktor:ktor-client-websockets:$ktorVer",
+    "io.ktor:ktor-client-logging:$ktorVer",
+    "io.ktor:ktor-client-okhttp:$ktorVer",
+    "io.ktor:ktor-client-auth:$ktorVer",
+    "io.ktor:ktor-client-core:$ktorVer",
+)
+
+@Suppress("UNUSED_PARAMETER")
+private infix fun Unit.and(o: Unit) {
 }
 
-object GoogleServicesDependencies {
-    const val location = "com.google.android.gms:play-services-location:${Versions.googleServices.location}"
-    const val ads = "com.google.android.gms:play-services-ads:21.5.0"
+private fun DependencyHandler.implementationIf(condition: Boolean, dependencyNotation: Any) {
+    if(condition) implementation(dependencyNotation)
 }
 
-object PagingDependencies {
-    const val compose = "androidx.paging:paging-compose:${Versions.paging.paging_compose}"
-    const val runtime = "androidx.paging:paging-runtime:${Versions.paging.paging}"
-}
+private fun DependencyHandler.implementation(vararg dependencyNotations: Any) =
+    dependencyNotations.forEach { add("implementation", it) }
 
-object ImageLoaderDependencies {
-    const val compose = "io.coil-kt:coil-compose:${Versions.imageLoader.coilCompose}"
-    const val gif = "io.coil-kt:coil-gif:${Versions.imageLoader.coilCompose}"
-    const val svg = "io.coil-kt:coil-svg:${Versions.imageLoader.coilSvg}"
-}
-
-object AndroidDependencies {
-    const val activityCompose = "androidx.activity:activity-compose:1.6.1"
-
-    const val lifecycleRuntime =
-        "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.android.lifecycleRuntime}"
-    const val lifecycleViewmodel =
-        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.android.lifecycleRuntime}"
-    const val material = "com.google.android.material:material:${Versions.android.material}"
-    const val ktx = "androidx.core:core-ktx:${Versions.android.ktx}"
-    const val playCore = "com.google.android.play:core:${Versions.android.playCore}"
-    const val dataStore = "androidx.datastore:datastore-preferences:${Versions.android.dataStore}"
-    const val prettyTime = "org.ocpsoft.prettytime:prettytime:${Versions.android.prettyTime}"
-    const val glance = "androidx.glance:glance-appwidget:${Versions.android.glance}"
-    const val navigationRuntime =
-        "androidx.navigation:navigation-runtime-ktx:${Versions.android.navigationRuntime}"
-    val room = RoomDependencies
-    val hilt = HiltDependencies
-}
-
-object NetworkDependencies {
-    val retrofit = RetrofitDependencies
-    val ktor = KtorDependencies
-    val okHttp = OkHttpDependencies
-}
-
-object OkHttpDependencies {
-    const val base = "com.squareup.okhttp3:okhttp:${Versions.network.okHttp.base}"
-    const val interceptor =
-        "com.squareup.okhttp3:logging-interceptor:${Versions.network.okHttp.interceptor}"
-    const val jackson =
-        "com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.network.okHttp.jackson}"
-}
-
-object RetrofitDependencies {
-    const val base = "com.squareup.retrofit2:retrofit:${Versions.network.retrofit.base}"
-    const val scalars = "com.squareup.retrofit2:converter-scalars:2.1.0"
-    const val gsonConverter =
-        "com.squareup.retrofit2:converter-gson:${Versions.network.retrofit.gsonConverter}"
-}
-object KtorDependencies {
-    const val core = "io.ktor:ktor-client-core:${Versions.network.ktor}"
-    const val cio = "io.ktor:ktor-client-cio:${Versions.network.ktor}"
-    const val serialization = "io.ktor:ktor-client-serialization:${Versions.network.ktor}"
-    const val websockets = "io.ktor:ktor-client-websockets:${Versions.network.ktor}"
-    const val logging = "io.ktor:ktor-client-logging:${Versions.network.ktor}"
-
-}
-
-object HiltDependencies {
-    const val navigation = "androidx.hilt:hilt-navigation-compose:${Versions.android.hilt.navigation}"
-    const val android = "com.google.dagger:hilt-android:${Versions.android.hilt.android}"
-    const val androidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.android.hilt.androidCompiler}"
-    const val compiler = "androidx.hilt:hilt-compiler:${Versions.android.hilt.compiler}"
-}
-
-object CoroutinesDependencies {
-    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-    const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
-    const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
-}
-
-object RoomDependencies {
-    const val runtime = "androidx.room:room-runtime:${Versions.android.room.room}"
-    const val   compiler = "androidx.room:room-compiler:${Versions.android.room.room}"
-    const val ktx = "androidx.room:room-ktx:${Versions.android.room.room}"
-    const val paging = "androidx.room:room-paging:${Versions.android.room.room}"
-}
-
-object ComposeDependencies {
-    const val ui = "androidx.compose.ui:ui:${Versions.compose.compose}"
-    const val material = "androidx.compose.material:material:${Versions.compose.compose}"
-    const val googleMaterial = "com.google.android.material:material:1.4.0"
-    const val tooling = "androidx.compose.ui:ui-tooling:${Versions.compose.compose}"
-    const val icons =
-        "androidx.compose.material:material-icons-extended:${Versions.compose.compose}"
-    const val navigation = "androidx.navigation:navigation-compose:${Versions.compose.composeNav}"
-    const val viewModel =
-        "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.compose.composeVm}"
-    const val activity = "androidx.activity:activity-compose:${Versions.compose.composeActivity}"
-    const val uiTest = "androidx.compose.ui:ui-test:${Versions.compose.compose}"
-    const val junit4 = "androidx.compose.ui:ui-test-junit4:${Versions.compose.compose}"
-    const val manifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose.compose}"
-    const val uiToolingPreview =
-        "androidx.compose.ui:ui-tooling-preview:${Versions.compose.compose}"
-    const val constraintLayout =
-        "androidx.constraintlayout:constraintlayout-compose:${Versions.compose.constraintLayout}"
-    const val livedata = "androidx.compose.runtime:runtime-livedata:${Versions.compose.compose}"
-}
-
-object TestDependencies {
-    const val junit = "junit:junit:${Versions.test.testJunit}"
-    const val runner = "androidx.test:runner:${Versions.test.testRunner}"
-    const val core = "androidx.test:core:${Versions.test.testCore}"
-    const val coreKtx = "androidx.test:core-ktx:${Versions.test.testCore}"
-    const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.test.testUiAutomator}"
-    const val junitExt = "androidx.test.ext:junit:${Versions.test.testJunitExt}"
-    const val mockk = "io.mockk:mockk:${Versions.test.testMockk}"
-    const val room = "androidx.room:room-testing:${Versions.android.room.testRoom}"
-    const val barista = "com.adevinta.android:barista:${Versions.test.barista}"
-    const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.test.expressoCore}"
-}
-
-object AccompanistDependencies {
-    const val animation =
-        "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist.animation}"
-    const val flowRow =
-        "com.google.accompanist:accompanist-flowlayout:${Versions.accompanist.flowRow}"
-    const val systemUiController =
-        "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist.systemUiController}"
-}
+private fun DependencyHandler.debugImplementation(vararg dependencyNotations: Any) =
+    dependencyNotations.forEach { add("debugImplementation", it) }

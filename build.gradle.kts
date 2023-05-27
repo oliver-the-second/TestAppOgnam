@@ -1,12 +1,13 @@
-buildscript {
+
+buildscript{
     repositories {
-        google()
         mavenCentral()
+        google()
     }
-    dependencies {
-        classpath ("com.android.tools.build:gradle:8.0.1")
-        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
-        // Hilt DI
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.45")
+    dependencies{
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
     }
 }
+
+//apply<CiAndroidPlugin>()
