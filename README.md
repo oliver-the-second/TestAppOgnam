@@ -1,12 +1,12 @@
 # TestAppOgnam
 Technologies: 
--Jetpack Compose \n
--DataStore \n
--Retrofit
--MVVM
--Flow
--Coroutines
--Koin
+- Jetpack Compose
+- DataStore
+- Retrofit
+- MVVM
+- Flow
+- Coroutines
+- Koin
 
 
 
