@@ -35,7 +35,9 @@ class AuthProfileViewModel(
     }
 
     suspend fun changeUsername(value: String) {
-        _username.emit(value)
+        if (isGoodUsername(value)) {
+            _username.emit(value)
+        }
     }
 
     suspend fun register() = withContext(Dispatchers.IO) {
@@ -48,4 +50,12 @@ class AuthProfileViewModel(
                 }
             }
     }
+}
+
+fun isGoodUsername(value: String): Boolean {
+    value.forEach { letter ->
+        if (!(letter in 'a'..'z' || letter in 'A'..'Z' || letter in '0'..'9' || letter == '-' || letter == '_'))
+            return false
+    }
+    return true
 }
