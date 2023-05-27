@@ -75,7 +75,7 @@ fun ProfileContent(
                     Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
                 }
                 Text(
-                    text = "Profile", fontFamily = FontFamily(
+                    text = "Профиль", fontFamily = FontFamily(
                         Font(R.font.roboto_regular)
                     )
                 )
@@ -112,19 +112,19 @@ fun ProfileContent(
             }
 
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label = "Phone", state.phone)
+            ProfileProperty(label = "Телефон", state.phone)
             Spacer(modifier = Modifier.height(12.dp))
             ProfileProperty(label = "Username", state.username)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label = "Name", state.name)
+            ProfileProperty(label = "Имя", state.name)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label = "City", state.city)
+            ProfileProperty(label = "Город", state.city)
             Spacer(modifier = Modifier.height(12.dp))
             ProfileProperty(label = "Instagram", state.instagram)
             Spacer(modifier = Modifier.height(12.dp))
             ProfileProperty(label = "Vk", state.vk)
             Spacer(modifier = Modifier.height(12.dp))
-            ProfileProperty(label = "Birthday", state.birthday)
+            ProfileProperty(label = "День рождения", state.birthday)
             Spacer(modifier = Modifier.height(120.dp))
         }
     }

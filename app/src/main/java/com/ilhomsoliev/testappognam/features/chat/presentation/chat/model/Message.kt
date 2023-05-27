@@ -10,25 +10,25 @@ var counter = 5
 val DemoMessages = listOf<Message>(
     Message(
         id = 1,
-        content = "Hello",
+        content = "Привет",
         owner = "LEFT",
         dateCreated = System.currentTimeMillis(),
     ),
     Message(
         id = 2,
-        content = "Hello",
+        content = "Привет",
         owner = "RIGHT",
         dateCreated = System.currentTimeMillis(),
     ),
     Message(
         id = 3,
-        content = "I am doing my Test app for Mango FZCO",
+        content = "Я делаю тестовое приложение для Mango FZCO.",
         owner = "LEFT",
         dateCreated = System.currentTimeMillis(),
     ),
     Message(
         id = 4,
-        content = "Good luck with that!",
+        content = "Удачи с этим!",
         owner = "RIGHT",
         dateCreated = System.currentTimeMillis(),
     ),

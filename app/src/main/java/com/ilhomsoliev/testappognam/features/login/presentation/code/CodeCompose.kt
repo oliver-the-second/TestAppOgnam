@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
@@ -67,7 +68,7 @@ fun CodeContent(
                         painterResource(
                             com.ilhomsoliev.testappognam.R.drawable.ic_back
                         ),
-                        "Phone number",
+                        "Номер телефона",
                         Modifier.size(24.dp),
                         colorScheme.tertiary
                     )
@@ -77,7 +78,7 @@ fun CodeContent(
                     verticalAlignment = Alignment.Bottom
                 ) {
                     Text(
-                        "Code",
+                        "Код",
                         Modifier,
                         style = typography.titleLarge,
                         color = colorScheme.tertiary
@@ -144,9 +145,9 @@ private fun ButtonTimer(
         )
         if (sec > 0) Text(
             buildAnnotatedString {
-                append("You can send code again in")
+                append("Вы можете повторно отправить код в")
                 withStyle(
-                    style.copy(colorScheme.primary).toSpanStyle()
+                    style.copy(Color.Black).toSpanStyle()
                 ) { append(" $sec сек") }
             },
             Modifier.padding(6.dp),
@@ -155,7 +156,7 @@ private fun ButtonTimer(
             onClick = {
                 onResend()
             }) {
-            Text(text = "Repeat code", fontFamily = FontFamily(
+            Text(text = "Повторить код", fontFamily = FontFamily(
                 Font(R.font.roboto_regular)
             )
             )

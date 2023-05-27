@@ -41,7 +41,7 @@ fun AuthProfileScreen(
                     if(value == null){
                         navController.navigate(Screens.ChatList)
                     }else
-                        Toast.makeText(context, "Some error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Какая-то ошибка", Toast.LENGTH_LONG).show()
                 }
             }
         }

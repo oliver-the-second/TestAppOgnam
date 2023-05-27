@@ -58,7 +58,7 @@ fun CodeScreen(vm: CodeViewModel, navController: NavController) {
 
             private suspend fun badCode() {
                 scope.launch {
-                    Toast.makeText(context, "Bad Code", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Плохой код", Toast.LENGTH_LONG).show()
                     vm.onCodeClear()
                 }
             }

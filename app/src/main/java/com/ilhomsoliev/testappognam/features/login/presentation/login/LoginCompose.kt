@@ -64,7 +64,7 @@ fun LoginContent(
                     .padding(top = 36.dp)
             ) {
 
-                Text(text = "Login", fontSize = 24.sp, color = Color.Black, fontFamily = FontFamily(
+                Text(text = "Авторизоваться", fontSize = 24.sp, color = Color.Black, fontFamily = FontFamily(
                     Font(R.font.roboto_regular)
                 )
                 )
@@ -86,7 +86,7 @@ fun LoginContent(
                         else Color(0xFFD56464)
                     )
                 ) {
-                    Text(modifier = Modifier.padding(12.dp), text = "Next", fontSize = 26.sp)
+                    Text(modifier = Modifier.padding(12.dp), text = "Следующий", fontSize = 26.sp)
                 }
             }
         }

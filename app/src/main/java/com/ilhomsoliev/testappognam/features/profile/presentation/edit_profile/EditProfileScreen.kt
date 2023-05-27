@@ -66,11 +66,11 @@ fun EditProfileScreen(
                 scope.launch {
                     val res = vm.saveData()
                     res?.let {
-                        Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Успех", Toast.LENGTH_LONG).show()
                         navController.popBackStack()
                     }
                     if (res == null) {
-                        Toast.makeText(context, "Fail", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Неудача", Toast.LENGTH_LONG).show()
                     }
                 }
             }

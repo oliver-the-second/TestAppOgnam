@@ -60,8 +60,8 @@ import java.text.SimpleDateFormat
 data class ChatState(
     val isLoading: Boolean = false,
     val imageUrl: String,
-    val chatName:String = "Chat name",
-    val curMessage:String = "Chat name",
+    val chatName:String = "Имя в чате",
+    val curMessage:String,
     var messages: List<Message> = DemoMessages,
 )
 
@@ -105,7 +105,7 @@ fun ChatContent(
                         }) {
                             IconWithText(
                                 icon = Icons.Default.Search,
-                                "Search"
+                                "Поиск"
                             )
                         }
 
@@ -114,7 +114,7 @@ fun ChatContent(
                         }) {
                             IconWithText(
                                 icon = Icons.Default.Edit,
-                                "Edit"
+                                "Редактировать"
                             )
                         }
                         DropdownMenuItem(modifier = Modifier.fillMaxWidth(), onClick = {
@@ -122,7 +122,7 @@ fun ChatContent(
                         }) {
                             IconWithText(
                                 icon = Icons.Default.ClearAll,
-                                "Clear Chat"
+                                "Очистить чат"
                             )
                         }
                     }

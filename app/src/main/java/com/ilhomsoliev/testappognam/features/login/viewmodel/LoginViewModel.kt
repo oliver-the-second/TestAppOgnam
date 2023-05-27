@@ -64,7 +64,7 @@ class LoginViewModel(
                 if(value){
 
                     null
-                }else "Some error"
+                }else "Какая-то ошибка"
             }
     }
 

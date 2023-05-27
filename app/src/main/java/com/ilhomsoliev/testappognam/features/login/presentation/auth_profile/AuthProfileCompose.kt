@@ -61,20 +61,20 @@ fun AuthProfileContent(
                     .padding(horizontal = 16.dp)
                     .padding(top = 36.dp)
             ) {
-                Text(text = "New User", fontSize = 24.sp, color = Color.Black, fontFamily = FontFamily(
+                Text(text = "Новый пользователь", fontSize = 24.sp, color = Color.Black, fontFamily = FontFamily(
                     Font(R.font.roboto_regular)
                 )
                 )
 
                 Spacer(modifier = Modifier.padding(12.dp))
                 TextField(modifier = Modifier.fillMaxWidth(), value = state.phone, enabled = false, onValueChange = {}, label = {
-                    Text(text = "Phone", fontFamily = FontFamily(
+                    Text(text = "Телефон", fontFamily = FontFamily(
                         Font(R.font.roboto_regular)))
                 })
                 Spacer(modifier = Modifier.padding(12.dp))
                 TextField(modifier = Modifier.fillMaxWidth(), value = state.name, onValueChange = { callback?.onNameChange(it) },
                     label = {
-                    Text(text = "Name",color = Color.Gray, fontFamily = FontFamily(
+                    Text(text = "Имя",color = Color.Gray, fontFamily = FontFamily(
                         Font(R.font.roboto_regular)))
                 })
                 Spacer(modifier = Modifier.padding(12.dp))
@@ -92,7 +92,7 @@ fun AuthProfileContent(
                         else Color(0xFFD56464)
                     )
                 ) {
-                    Text(modifier = Modifier.padding(12.dp), text = "Next", fontSize = 26.sp)
+                    Text(modifier = Modifier.padding(12.dp), text = "дальше", fontSize = 26.sp)
                 }
             }
         }

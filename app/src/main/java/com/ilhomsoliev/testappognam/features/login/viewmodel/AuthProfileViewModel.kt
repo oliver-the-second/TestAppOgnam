@@ -44,7 +44,7 @@ class AuthProfileViewModel(
         repository.register(_name.value, _username.value)
             .let { value ->
                 if (value == null) {
-                    "Some error on register"
+                    "Какая-то ошибка в регистрации"
                 } else {
                     null
                 }

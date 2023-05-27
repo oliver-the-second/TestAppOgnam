@@ -107,7 +107,7 @@ fun EditProfileContent(
                     Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
                 }
                 Text(
-                    text = "Edit Profile", fontFamily = FontFamily(
+                    text = "Редактировать профиль", fontFamily = FontFamily(
                         Font(R.font.roboto_regular)
                     )
                 )
@@ -138,7 +138,7 @@ fun EditProfileContent(
                 )
             }
             Text(
-                text = "Click to image to edit", fontFamily = FontFamily(
+                text = "Нажмите на изображение для редактирования", fontFamily = FontFamily(
                     Font(R.font.roboto_regular)
                 ), fontSize = 12.sp
             )
@@ -150,7 +150,7 @@ fun EditProfileContent(
                 enabled = false,
                 label = {
                     Text(
-                        text = "Phone", color = Color.Gray, fontFamily = FontFamily(
+                        text = "Телефон", color = Color.Gray, fontFamily = FontFamily(
                             Font(R.font.roboto_regular)
                         )
                     )
@@ -174,7 +174,7 @@ fun EditProfileContent(
                 callback.onNameChange(it)
             }, label = {
                 Text(
-                    text = "Name", color = Color.Gray, fontFamily = FontFamily(
+                    text = "Имя", color = Color.Gray, fontFamily = FontFamily(
                         Font(R.font.roboto_regular)
                     )
                 )
@@ -188,7 +188,7 @@ fun EditProfileContent(
                 },
                 label = {
                     Text(
-                        text = "City", color = Color.Gray, fontFamily = FontFamily(
+                        text = "Город", color = Color.Gray, fontFamily = FontFamily(
                             Font(R.font.roboto_regular)
                         )
                     )
@@ -231,7 +231,7 @@ fun EditProfileContent(
                 },
                 label = {
                     Text(
-                        text = "Birthday", color = Color.Gray, fontFamily = FontFamily(
+                        text = "День рождения", color = Color.Gray, fontFamily = FontFamily(
                             Font(R.font.roboto_regular)
                         )
                     )
@@ -247,7 +247,7 @@ fun EditProfileContent(
             ) {
                 Text(
                     modifier = Modifier.padding(12.dp),
-                    text = "Save",
+                    text = "Сохранять",
                     fontSize = 26.sp,
                     color = Color.White
                 )

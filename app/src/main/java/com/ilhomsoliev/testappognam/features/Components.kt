@@ -156,7 +156,7 @@ fun SearchBar(
         value = state.text,
         modifier = modifier,
         label = state.placeHolder
-            ?: "Search",
+            ?: "Поиск",
         isOnline = state.online,
         fullWidth = false,
         onBack = {

@@ -98,7 +98,7 @@ private fun ChatTextField(
                             Spacer(modifier = Modifier.width(12.dp))
                             if (empty) {
                                 Text(
-                                    text = "Type here",
+                                    text = "Введите сюда",
                                     fontSize = 18.sp
                                 )
                             }

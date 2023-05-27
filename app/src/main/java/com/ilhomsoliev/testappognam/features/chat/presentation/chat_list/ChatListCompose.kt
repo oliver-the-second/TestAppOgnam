@@ -38,7 +38,7 @@ fun ChatListContent(
 ) {
     Scaffold(topBar = {
         TopAppBar(title = {
-            Text(text = "Chat List", fontFamily = FontFamily(
+            Text(text = "Список чатов", fontFamily = FontFamily(
                 Font(R.font.roboto_regular)
             )
             )
@@ -59,9 +59,9 @@ fun ChatListContent(
             LazyColumn(){ 
                 items(10) {
                     ChatItem(
-                        title = "Chat title",
-                        description = "Description",
-                        date = "1 day ago",
+                        title = "Название чата",
+                        description = "Описание",
+                        date = "1 день назад",
                         imageUrl = "https://media.npr.org/assets/img/2020/02/27/wide-use_hpromophoto_helenepambrun-72fdb64792139d94a06f18686d0bb3131a238a70-s1100-c50.jpg"
                     ) {
                         callback.openChat()

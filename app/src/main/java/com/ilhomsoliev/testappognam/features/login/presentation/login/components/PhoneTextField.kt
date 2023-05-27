@@ -65,7 +65,7 @@ fun PhoneField(
         ) {
             Image(
                 country.flag,
-                "Choose country",
+                "Выберите страну",
                 Modifier
                     .padding(start = 10.dp)
                     .size(20.dp)
@@ -130,10 +130,10 @@ fun PhoneTextField(
         shape = MaterialTheme.shapes.large,
         label = if(value.isNotEmpty())
             textFieldLabel(
-                true, "Phone Number"
+                true, "Номер телефона"
             ) else null,
         placeholder = textFieldLabel(
-            false, "Phone Number"
+            false, "Номер телефона"
         ),
         keyboardOptions = KeyboardOptions(
             keyboardType = NumberPassword
