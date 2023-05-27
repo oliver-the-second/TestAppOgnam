@@ -19,6 +19,7 @@ fun EditProfileScreen(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val name by vm.name.collectAsState()
+    val status by vm.status.collectAsState()
     val username by vm.username.collectAsState()
     val phone by vm.phone.collectAsState()
     val instagram by vm.instagram.collectAsState()
@@ -46,6 +47,7 @@ fun EditProfileScreen(
             isLoading = isLoading,
             avatar = avatar,
             avatarUrl = avatarUrl,
+            status = status,
         ), callback = object : EditProfileCallback {
             override fun onLogout() {
                 scope.launch {
@@ -77,6 +79,10 @@ fun EditProfileScreen(
 
             override fun onNameChange(value: String) {
                 scope.launch { vm.onNameChange(value) }
+            }
+
+            override fun onStatusChange(value: String) {
+                scope.launch { vm.onStatusChange(value) }
             }
 
             override fun onLastChange(value: String) {

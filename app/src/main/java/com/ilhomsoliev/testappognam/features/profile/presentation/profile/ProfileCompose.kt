@@ -41,6 +41,7 @@ import com.ilhomsoliev.testappognam.shared.components.Loader
 data class ProfileState(
     val name: String,
     val username: String,
+    val status: String,
     val vk: String,
     val instagram: String,
     val phone: String,
@@ -117,6 +118,8 @@ fun ProfileContent(
             ProfileProperty(label = "Username", state.username)
             Spacer(modifier = Modifier.height(12.dp))
             ProfileProperty(label = "Имя", state.name)
+            Spacer(modifier = Modifier.height(12.dp))
+            ProfileProperty(label = "О себе", state.status)
             Spacer(modifier = Modifier.height(12.dp))
             ProfileProperty(label = "Город", state.city)
             Spacer(modifier = Modifier.height(12.dp))

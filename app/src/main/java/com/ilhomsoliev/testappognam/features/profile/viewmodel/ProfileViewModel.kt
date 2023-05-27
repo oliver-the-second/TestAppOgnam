@@ -13,6 +13,7 @@ class ProfileViewModel(
 
     private val _name = MutableStateFlow("")
     val name = _name.asStateFlow()
+
     private val _last = MutableStateFlow("")
     val last = _last.asStateFlow()
 
@@ -54,6 +55,7 @@ class ProfileViewModel(
             _isLoading.emit(false)
             _phone.emit(profile.phone)
             _name.emit(profile.name)
+            _status.emit(profile.status?:"")
             _username.emit(profile.username)
             _last.emit(profile.last ?: "")
             _instagram.emit(profile.instagram ?: "")

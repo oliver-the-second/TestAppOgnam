@@ -54,6 +54,7 @@ import java.io.IOException
 
 data class EditProfileState(
     val name: String,
+    val status: String,
     val username: String,
     val vk: String,
     val instagram: String,
@@ -72,6 +73,7 @@ interface EditProfileCallback {
     fun onBack()
     fun onSave()
     fun onNameChange(value: String)
+    fun onStatusChange(value: String)
     fun onLastChange(value: String)
     fun onVkChange(value: String)
     fun onInstagramChange(value: String)
@@ -175,6 +177,16 @@ fun EditProfileContent(
             }, label = {
                 Text(
                     text = "Имя", color = Color.Gray, fontFamily = FontFamily(
+                        Font(R.font.roboto_regular)
+                    )
+                )
+            })
+            Spacer(modifier = Modifier.height(12.dp))
+            TextField(modifier = Modifier.fillMaxWidth(), value = state.status, onValueChange = {
+                callback.onStatusChange(it)
+            }, label = {
+                Text(
+                    text = "О себе", color = Color.Gray, fontFamily = FontFamily(
                         Font(R.font.roboto_regular)
                     )
                 )

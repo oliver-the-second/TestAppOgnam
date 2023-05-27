@@ -18,6 +18,7 @@ fun ProfileScreen(
 
     val scope = rememberCoroutineScope()
     val name by vm.name.collectAsState()
+    val status by vm.status.collectAsState()
     val username by vm.username.collectAsState()
     val phone by vm.phone.collectAsState()
     val instagram by vm.instagram.collectAsState()
@@ -45,7 +46,8 @@ fun ProfileScreen(
             city = city,
             birthday = birthday,
             isLoading = isLoading,
-            avatarUrl = avatarUrl
+            avatarUrl = avatarUrl,
+            status = status,
         ), callback = object : ProfileCallback {
             override fun onLogout() {
                 scope.launch {

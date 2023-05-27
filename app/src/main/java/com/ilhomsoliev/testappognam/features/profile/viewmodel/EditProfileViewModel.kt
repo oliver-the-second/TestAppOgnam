@@ -98,6 +98,10 @@ class EditProfileViewModel(
         _name.emit(value)
     }
 
+    suspend fun onStatusChange(value: String) {
+        _status.emit(value)
+    }
+
     suspend fun onLastChange(value: String) {
         _last.emit(value)
     }
