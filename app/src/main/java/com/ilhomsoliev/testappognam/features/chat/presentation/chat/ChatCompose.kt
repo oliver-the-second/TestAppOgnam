@@ -4,7 +4,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -139,7 +138,7 @@ fun ChatContent(
                         )
                     }
                     ImageBox(
-                        imageHttp = state.imageUrl,
+                        imageUrl = state.imageUrl,
                         modifier = Modifier
                             .size(44.dp)
                             .clip(CircleShape),

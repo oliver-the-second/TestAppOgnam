@@ -2,6 +2,7 @@ package com.ilhomsoliev.testappognam.features.profile.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ilhomsoliev.testappognam.data.network.dto.request.updateProfile.Avatar
 import com.ilhomsoliev.testappognam.data.repository.ProfileRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,6 +46,12 @@ class EditProfileViewModel(
     private val _status = MutableStateFlow("")
     val status = _status.asStateFlow()
 
+    private val _avatar = MutableStateFlow("" to "")
+    val avatar = _avatar.asStateFlow()
+
+    private val _avatarUrl = MutableStateFlow<String?>(null)
+    val avatarUrl = _avatarUrl.asStateFlow()
+
 
     init {
         viewModelScope.launch {
@@ -62,8 +69,8 @@ class EditProfileViewModel(
                 _vk.emit(profile.vk ?: "")
                 _city.emit(profile.city ?: "")
                 _birthday.emit(profile.birthday ?: "2000-01-30")
+                _avatarUrl.emit(profile.avatars?.bigAvatar)
             }
-
         }
     }
 
@@ -73,7 +80,10 @@ class EditProfileViewModel(
 
     suspend fun saveData() = withContext(IO) {
         repository.updateProfile(
-            avatar = null,
+            avatar = if (_avatar.value.first.isNotEmpty() && _avatar.value.second.isNotEmpty()) Avatar(
+                _avatar.value.second,
+                _avatar.value.first
+            ) else null,
             birthday = _birthday.value,
             city = _city.value,
             instagram = _instagram.value,
@@ -106,5 +116,9 @@ class EditProfileViewModel(
 
     suspend fun onCityChange(value: String) {
         _city.emit(value)
+    }
+
+    suspend fun onAvatarChange(value: Pair<String, String>) {
+        _avatar.emit(value)
     }
 }

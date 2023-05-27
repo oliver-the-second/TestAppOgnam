@@ -20,7 +20,7 @@ import com.skydoves.landscapist.placeholder.shimmer.ShimmerPlugin
 
 @Composable
 fun ImageBox(
-    imageHttp: String,
+    imageUrl: String = "",
     uri: Uri? = null,
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop
@@ -28,7 +28,7 @@ fun ImageBox(
     if (uri == null) {
         GlideImage(
             modifier = modifier,
-            imageModel = { imageHttp },
+            imageModel = { imageUrl },
             imageOptions = ImageOptions(contentScale = contentScale),
             failure = {
                 Box(

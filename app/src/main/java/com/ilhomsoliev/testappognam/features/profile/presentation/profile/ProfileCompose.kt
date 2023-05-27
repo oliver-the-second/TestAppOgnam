@@ -1,13 +1,17 @@
 package com.ilhomsoliev.testappognam.features.profile.presentation.profile
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -22,12 +26,15 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ilhomsoliev.testappognam.R
+import com.ilhomsoliev.testappognam.core.Constants
+import com.ilhomsoliev.testappognam.shared.components.ImageBox
 import com.ilhomsoliev.testappognam.shared.components.Loader
 
 
@@ -41,7 +48,8 @@ data class ProfileState(
     val isOnline: Boolean,
     val city: String,
     val birthday: String,
-    val isLoading: Boolean
+    val isLoading: Boolean,
+    val avatarUrl: String?
 )
 
 interface ProfileCallback {
@@ -66,8 +74,11 @@ fun ProfileContent(
                 }) {
                     Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
                 }
-                Text(text = "Profile", fontFamily = FontFamily(
-                    Font(R.font.roboto_regular)))
+                Text(
+                    text = "Profile", fontFamily = FontFamily(
+                        Font(R.font.roboto_regular)
+                    )
+                )
             }
         }, actions = {
             IconButton(onClick = {
@@ -89,6 +100,17 @@ fun ProfileContent(
                 .padding(horizontal = 12.dp)
                 .padding(it)
         ) {
+            Spacer(modifier = Modifier.height(12.dp))
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                ImageBox(
+                    imageUrl = (Constants.HOST + state.avatarUrl),
+                    modifier = Modifier
+                        .size(200.dp)
+                        .clip(CircleShape)
+                        .padding(top = 12.dp)
+                )
+            }
+
             Spacer(modifier = Modifier.height(12.dp))
             ProfileProperty(label = "Phone", state.phone)
             Spacer(modifier = Modifier.height(12.dp))

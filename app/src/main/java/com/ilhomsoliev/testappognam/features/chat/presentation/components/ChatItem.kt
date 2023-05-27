@@ -49,7 +49,7 @@ fun ChatItem(
                 ImageBox(
                     modifier = Modifier
                         .size(44.dp)
-                        .clip(CircleShape), imageHttp = imageUrl
+                        .clip(CircleShape), imageUrl = imageUrl
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Column() {

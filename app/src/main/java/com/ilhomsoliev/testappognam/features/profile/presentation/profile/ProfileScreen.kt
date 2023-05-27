@@ -1,12 +1,10 @@
 package com.ilhomsoliev.testappognam.features.profile.presentation.profile
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import com.ilhomsoliev.testappognam.app.navigation.Screens
 import com.ilhomsoliev.testappognam.features.profile.viewmodel.ProfileViewModel
@@ -29,6 +27,7 @@ fun ProfileScreen(
     val vk by vm.vk.collectAsState()
     val isOnline by vm.isOnline.collectAsState()
     val isLoading by vm.isLoading.collectAsState()
+    val avatarUrl by vm.avatarUrl.collectAsState()
 
     LaunchedEffect(key1 = Unit, block = {
         scope.launch { vm.getProfile() }
@@ -45,7 +44,8 @@ fun ProfileScreen(
             isOnline = isOnline,
             city = city,
             birthday = birthday,
-            isLoading = isLoading
+            isLoading = isLoading,
+            avatarUrl = avatarUrl
         ), callback = object : ProfileCallback {
             override fun onLogout() {
                 scope.launch {

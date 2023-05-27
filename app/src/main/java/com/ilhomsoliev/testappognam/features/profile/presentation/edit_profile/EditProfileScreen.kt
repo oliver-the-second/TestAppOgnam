@@ -28,6 +28,8 @@ fun EditProfileScreen(
     val vk by vm.vk.collectAsState()
     val isOnline by vm.isOnline.collectAsState()
     val isLoading by vm.isLoading.collectAsState()
+    val avatar by vm.avatar.collectAsState()
+    val avatarUrl by vm.avatarUrl.collectAsState()
 
 
     EditProfileContent(
@@ -41,7 +43,9 @@ fun EditProfileScreen(
             isOnline = isOnline,
             city = city,
             birthday = birthday,
-            isLoading = isLoading
+            isLoading = isLoading,
+            avatar = avatar,
+            avatarUrl = avatarUrl,
         ), callback = object : EditProfileCallback {
             override fun onLogout() {
                 scope.launch {
@@ -93,6 +97,10 @@ fun EditProfileScreen(
 
             override fun onBirthdayChange(value: String) {
                 scope.launch { vm.onBirthdayChange(value) }
+            }
+
+            override fun onAvatarChange(value: Pair<String, String>) {
+                scope.launch { vm.onAvatarChange(value) }
             }
         })
 }

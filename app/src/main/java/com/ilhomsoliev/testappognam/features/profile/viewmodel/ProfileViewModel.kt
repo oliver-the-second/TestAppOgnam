@@ -1,13 +1,9 @@
 package com.ilhomsoliev.testappognam.features.profile.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.ilhomsoliev.testappognam.data.repository.ProfileRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ProfileViewModel(
     private val repository: ProfileRepository,
@@ -45,6 +41,10 @@ class ProfileViewModel(
     val status = _status.asStateFlow()
 
 
+    private val _avatarUrl = MutableStateFlow<String?>(null)
+    val avatarUrl = _avatarUrl.asStateFlow()
+
+
     suspend fun getProfile() {
         _isLoading.emit(true)
         val res = repository.getProfile()?.profile_data
@@ -60,6 +60,7 @@ class ProfileViewModel(
             _vk.emit(profile.vk ?: "")
             _city.emit(profile.city ?: "")
             _birthday.emit(profile.birthday ?: "2000-01-30")
+            _avatarUrl.emit(profile.avatars?.bigAvatar)
         }
     }
 
