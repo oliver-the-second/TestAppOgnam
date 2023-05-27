@@ -31,6 +31,7 @@ fun DependencyHandlerScope.compose() = implementation(
     "androidx.activity:activity-compose:1.6.0",
     "androidx.compose.ui:ui:$composeVer",
     "io.coil-kt:coil-compose:2.3.0",
+    "androidx.compose.material:material-icons-extended:${composeVer}",
 ) and implementation(
     "androidx.compose.ui:ui-test-manifest:$composeVer",
     "androidx.compose.ui:ui-tooling-preview:$composeVer",

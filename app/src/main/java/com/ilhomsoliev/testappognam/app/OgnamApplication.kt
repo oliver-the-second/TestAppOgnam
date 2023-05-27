@@ -5,6 +5,7 @@ import com.ilhomsoliev.testappognam.core.Constants
 import com.ilhomsoliev.testappognam.data.local.DataStoreManager
 import com.ilhomsoliev.testappognam.data.network.ServerApi
 import com.ilhomsoliev.testappognam.data.repository.LoginRepository
+import com.ilhomsoliev.testappognam.data.repository.ProfileRepository
 import com.ilhomsoliev.testappognam.features.chat.viewmodel.ChatListViewModel
 import com.ilhomsoliev.testappognam.features.chat.viewmodel.ChatViewModel
 import com.ilhomsoliev.testappognam.features.login.viewmodel.AuthProfileViewModel
@@ -53,6 +54,9 @@ class OgnamApplication : Application() {
                 LoginRepository(get(), get())
             }
             single {
+                ProfileRepository(get(), get())
+            }
+            single {
                 DataStoreManager(this@OgnamApplication)
             }
             viewModel {
@@ -74,7 +78,7 @@ class OgnamApplication : Application() {
                 ChatViewModel()
             }
             viewModel {
-                ProfileViewModel()
+                ProfileViewModel(get())
             }
         }
 

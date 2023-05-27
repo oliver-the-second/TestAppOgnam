@@ -1,6 +1,11 @@
 package com.ilhomsoliev.testappognam.features.profile.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.ilhomsoliev.testappognam.data.repository.ProfileRepository
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel(
+    private val repository: ProfileRepository,
+) : ViewModel() {
+
+
 }
