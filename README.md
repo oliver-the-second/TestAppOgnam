@@ -1,7 +1,7 @@
 # TestAppOgnam
 Technologies: 
--Jetpack Compose
--DataStore
+-Jetpack Compose \n
+-DataStore \n
 -Retrofit
 -MVVM
 -Flow
